@@ -3,6 +3,7 @@ package car_rental.demo.business.concretes;
 import car_rental.demo.business.abstracts.CustomerService;
 import car_rental.demo.business.requests.customerRequests.AddCustomerRequest;
 import car_rental.demo.business.responses.customerResponses.GetAllCustomerResponse;
+import car_rental.demo.core.exceptions.BusinessException;
 import car_rental.demo.core.utilities.mapper.ModelMapperService;
 import car_rental.demo.dataAccess.abstracts.CustomerRepository;
 import car_rental.demo.entities.concretes.Customer;
@@ -27,7 +28,7 @@ public class CustomerManager implements CustomerService {
     public void add(AddCustomerRequest customerRequest) {
 
         if(!customerRequest.getPassword().equals(customerRequest.getConfirmPassword())){
-            throw new RuntimeException("Password fields are not matched");
+            throw new BusinessException("Password fields are not matched");
         }
 
         Customer customer = mapperService.forRequest().map(customerRequest,Customer.class);

@@ -10,26 +10,26 @@ import lombok.Data;
 @AllArgsConstructor
 public class AddCustomerRequest {
 
-    @Size(min = 2,message = "First name field's length should be at least 2")
-    @NotBlank(message = "This field is required")
+    @Size(min = 2,message = "{validation.size}")
+    @NotBlank(message = "{validation.notBlank}")
     private String firstName;
 
-    @Size(min = 2,message = "Last name field's length should be at least 2")
-    @NotBlank(message = "This field is required")
+    @Size(min = 2,message = "{validation.size}")
+    @NotBlank(message = "{validation.notBlank}")
     private String lastName;
 
-    @Email(message = "Please write valid email")
-    @NotBlank(message = "This field is required")
+    @Email(message = "{validation.email}")
+    @NotBlank(message = "{validation.notBlank}")
     private String email;
 
-    @NotBlank(message = "This field is required")
+    @NotBlank(message = "{validation.notBlank}")
     private String phoneNumber;
 
-    @NotBlank(message = "This field is required")
-    @Size(min = 6,message = "Password field's length should be at least 6")
+    @Size(min = 6,message = "{validation.size}")
+    @NotBlank(message = "{validation.notBlank}")
     private String password;
 
-    @NotBlank(message = "This field is required")
+    @NotBlank(message = "{validation.notBlank}")
     private String confirmPassword;
 
 }
