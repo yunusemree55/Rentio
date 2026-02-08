@@ -1,8 +1,8 @@
 package car_rental.demo.business.concretes;
 
 import car_rental.demo.business.abstracts.CustomerService;
-import car_rental.demo.business.requests.customerRequests.AddCustomerRequest;
-import car_rental.demo.business.responses.customerResponses.GetAllCustomerResponse;
+import car_rental.demo.business.requests.customer.AddCustomerRequest;
+import car_rental.demo.business.responses.customer.GetAllCustomerResponse;
 import car_rental.demo.business.rules.customer.CustomerBusinessRules;
 import car_rental.demo.business.rules.user.UserBusinessRules;
 import car_rental.demo.core.utilities.hashing.HashingService;
@@ -34,7 +34,6 @@ public class CustomerManager implements CustomerService {
 
         userBusinessRules.checkIfEmailExists(customerRequest.getEmail());
         userBusinessRules.checkIfPhoneNumberExists(customerRequest.getPhoneNumber());
-        userBusinessRules.checkIfPasswordsMatch(customerRequest.getPassword(),customerRequest.getConfirmPassword());
 
         Customer customer = mapperService.forRequest().map(customerRequest,Customer.class);
         customer.setPassword(hashingService.encode(customer.getPassword()));

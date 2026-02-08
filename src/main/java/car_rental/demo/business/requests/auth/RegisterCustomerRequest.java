@@ -1,4 +1,4 @@
-package car_rental.demo.business.requests.customerRequests;
+package car_rental.demo.business.requests.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AddCustomerRequest {
+public class RegisterCustomerRequest {
 
     @Size(min = 2,message = "{validation.size}")
     @NotBlank(message = "{validation.notBlank}")

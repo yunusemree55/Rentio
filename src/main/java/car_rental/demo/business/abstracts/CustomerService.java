@@ -1,7 +1,7 @@
 package car_rental.demo.business.abstracts;
 
-import car_rental.demo.business.requests.customerRequests.AddCustomerRequest;
-import car_rental.demo.business.responses.customerResponses.GetAllCustomerResponse;
+import car_rental.demo.business.requests.customer.AddCustomerRequest;
+import car_rental.demo.business.responses.customer.GetAllCustomerResponse;
 
 import java.util.List;
 

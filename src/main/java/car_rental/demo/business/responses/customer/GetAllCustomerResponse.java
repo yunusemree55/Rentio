@@ -1,4 +1,4 @@
-package car_rental.demo.business.responses.customerResponses;
+package car_rental.demo.business.responses.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
