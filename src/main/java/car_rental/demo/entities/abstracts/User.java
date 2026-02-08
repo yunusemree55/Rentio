@@ -7,8 +7,10 @@ import lombok.EqualsAndHashCode;
 
 
 @EqualsAndHashCode(callSuper = true)
+@Entity
 @Data
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "users")
 public abstract class User extends BaseEntity{
 
     @Column(name = "email",unique = true)

@@ -3,7 +3,9 @@ package car_rental.demo.business.concretes;
 import car_rental.demo.business.abstracts.CustomerService;
 import car_rental.demo.business.requests.customerRequests.AddCustomerRequest;
 import car_rental.demo.business.responses.customerResponses.GetAllCustomerResponse;
-import car_rental.demo.core.exceptions.BusinessException;
+import car_rental.demo.business.rules.customer.CustomerBusinessRules;
+import car_rental.demo.business.rules.user.UserBusinessRules;
+import car_rental.demo.core.utilities.hashing.HashingService;
 import car_rental.demo.core.utilities.mapper.ModelMapperService;
 import car_rental.demo.dataAccess.abstracts.CustomerRepository;
 import car_rental.demo.entities.concretes.Customer;
@@ -17,6 +19,9 @@ public class CustomerManager implements CustomerService {
 
     private CustomerRepository customerRepository;
     private ModelMapperService mapperService;
+    private UserBusinessRules<Customer> userBusinessRules;
+    private CustomerBusinessRules customerBusinessRules;
+    private HashingService hashingService;
 
     @Override
     public List<GetAllCustomerResponse> getAll() {
@@ -27,11 +32,13 @@ public class CustomerManager implements CustomerService {
     @Override
     public void add(AddCustomerRequest customerRequest) {
 
-        if(!customerRequest.getPassword().equals(customerRequest.getConfirmPassword())){
-            throw new BusinessException("Password fields are not matched");
-        }
+        userBusinessRules.checkIfEmailExists(customerRequest.getEmail());
+        userBusinessRules.checkIfPhoneNumberExists(customerRequest.getPhoneNumber());
+        userBusinessRules.checkIfPasswordsMatch(customerRequest.getPassword(),customerRequest.getConfirmPassword());
 
         Customer customer = mapperService.forRequest().map(customerRequest,Customer.class);
+        customer.setPassword(hashingService.encode(customer.getPassword()));
+
         customerRepository.save(customer);
     }
 }
