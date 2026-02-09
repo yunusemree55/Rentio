@@ -16,7 +16,8 @@ public class LocalizationSourceConfig {
 
         messageSource.setBasenames(
                 "classpath:i18n/validations",
-                "classpath:i18n/errors"
+                "classpath:i18n/errors",
+                "classpath:i18n/emails"
         );
         messageSource.setDefaultEncoding("UTF-8");
 

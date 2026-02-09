@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:text="#{email.welcome.title}">Rentio'ya Hoş Geldiniz!</title>
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+        /* Reset styles */
+        body, table, td, p, a, li, blockquote {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        table, td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+        img {
+            -ms-interpolation-mode: bicubic;
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            background-color: #f4f7fa;
+        }
+
+        /* Main styles */
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .logo span {
+            color: #e94560;
+        }
+
+        .tagline {
+            color: #a0aec0;
+            font-size: 14px;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        .hero-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: #ffffff;
+        }
+
+        .hero-title {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0 0 15px;
+            line-height: 1.3;
+        }
+
+        .hero-subtitle {
+            color: #a0aec0;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .content-section {
+            padding: 40px 30px;
+            background-color: #ffffff;
+        }
+
+        .greeting {
+            font-size: 18px;
+            color: #1a1a2e;
+            margin: 0 0 20px;
+            font-weight: 600;
+        }
+
+        .message {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.8;
+            margin: 0 0 30px;
+        }
+
+        .features-grid {
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border-left: 4px solid #e94560;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            min-width: 50px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        .feature-content h3 {
+            color: #1a1a2e;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 0 5px;
+        }
+
+        .feature-content p {
+            color: #64748b;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+            color: #ffffff !important;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-subtext {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        .stats-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+            background-color: #1a1a2e;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+        }
+
+        .stat-number {
+            color: #e94560;
+            font-size: 28px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            color: #a0aec0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .divider {
+            width: 1px;
+            background-color: #2d3748;
+        }
+
+        .social-section {
+            padding: 30px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .social-title {
+            color: #1a1a2e;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: #1a1a2e;
+        }
+
+        .social-link:hover svg {
+            fill: #ffffff;
+        }
+
+        .footer {
+            background-color: #1a1a2e;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin: 0 0 15px;
+        }
+
+        .footer-logo span {
+            color: #e94560;
+        }
+
+        .footer-text {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0 0 20px;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-link {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 13px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #e94560;
+        }
+
+        .footer-copyright {
+            color: #4a5568;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+        }
+
+        .unsubscribe {
+            color: #64748b;
+            font-size: 11px;
+            margin-top: 15px;
+        }
+
+        .unsubscribe a {
+            color: #e94560;
+            text-decoration: none;
+        }
+
+        /* Mobile Responsive */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+
+            .header, .hero-section, .content-section, .cta-section, .social-section, .footer {
+                padding: 30px 20px !important;
+            }
+
+            .hero-title {
+                font-size: 24px !important;
+            }
+
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .feature-icon {
+                margin: 0 auto 15px !important;
+            }
+
+            .stats-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .divider {
+                display: none;
+            }
+
+            .stat-item {
+                padding: 10px 0;
+                border-bottom: 1px solid #2d3748;
+            }
+
+            .stat-item:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f7fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+<!-- Preheader Text -->
+<div style="display: none; max-height: 0; overflow: hidden;" >
+    <span th:text="#{email.welcome.preheader}">Rentio'ya hoş geldiniz! Premium araç kiralama deneyiminiz başlıyor.</span> 🚗
+</div>
+
+<!-- Email Container -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f7fa;">
+    <tr>
+        <td style="padding: 40px 20px;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container" style="margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+
+                <!-- Header -->
+                <tr>
+                    <td class="header" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding: 40px 30px; text-align: center;">
+                        <h1 class="logo" style="font-size: 36px; font-weight: 800; color: #ffffff; letter-spacing: 2px; margin: 0;">
+                            RENT<span style="color: #e94560;">IO</span>
+                        </h1>
+                        <p class="tagline" style="color: #a0aec0; font-size: 14px; margin-top: 8px; letter-spacing: 1px;" th:text="#{email.welcome.header.subtitle}">
+                            Premium Araç Kiralama
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Hero Section -->
+                <tr>
+                    <td class="hero-section" style="background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); padding: 50px 30px; text-align: center;">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td align="center">
+                                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); border-radius: 50%; margin: 0 auto 25px; line-height: 80px;">
+                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/checkmark--v1.png" alt="Success" width="40" style="vertical-align: middle;">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h2 class="hero-title" style="color: #ffffff; font-size: 28px; font-weight: 700; margin: 0 0 15px; line-height: 1.3;" th:text="#{email.welcome.hero.title}">
+                                        Hoş Geldiniz!
+                                    </h2>
+                                    <p class="hero-subtitle" style="color: #a0aec0; font-size: 16px; line-height: 1.6; margin: 0;" th:utext="#{email.welcome.hero.description}">
+                                        Rentio ailesine katıldığınız için teşekkür ederiz.<br>
+                                        Premium araç kiralama deneyiminiz artık başlıyor!
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Content Section -->
+                <tr>
+                    <td class="content-section" style="padding: 40px 30px; background-color: #ffffff;">
+                        <p class="greeting" style="font-size: 18px; color: #1a1a2e; margin: 0 0 20px; font-weight: 600;">
+                            <span th:text="#{email.welcome.greeting(${name})}">Merhaba Kullanıcı</span>,
+                        </p>
+                        <p class="message" style="font-size: 15px; color: #4a5568; line-height: 1.8; margin: 0 0 30px;" th:text="#{email.welcome.description}">
+                            Hesabınız başarıyla oluşturuldu! Artık Türkiye'nin en geniş araç filomuzdan dilediğiniz aracı kolayca kiralayabilirsiniz. Size özel fırsatlar ve ayrıcalıklardan yararlanmaya hemen başlayın.
+                        </p>
+
+                        <!-- Features -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <!-- Feature 1 -->
+                            <tr>
+                                <td style="padding-bottom: 20px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius: 12px; border-left: 4px solid #e94560;">
+                                        <tr>
+                                            <td style="padding: 20px;">
+                                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                    <tr>
+                                                        <td style="vertical-align: top; width: 50px;">
+                                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); border-radius: 12px; text-align: center; line-height: 50px;">
+                                                                <img src="https://img.icons8.com/ios-filled/30/ffffff/car--v1.png" alt="Cars" width="24" style="vertical-align: middle;">
+                                                            </div>
+                                                        </td>
+                                                        <td style="padding-left: 15px; vertical-align: top;">
+                                                            <h3 style="color: #1a1a2e; font-size: 16px; font-weight: 600; margin: 0 0 5px;" th:text="#{email.welcome.feature.fleet.title}">Geniş Araç Filosu</h3>
+                                                            <p style="color: #64748b; font-size: 14px; margin: 0; line-height: 1.5;" th:text="#{email.welcome.feature.fleet.description}">Ekonomikten lükse, binlerce araç seçeneği sizleri bekliyor.</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Feature 2 -->
+                            <tr>
+                                <td style="padding-bottom: 20px;">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius: 12px; border-left: 4px solid #e94560;">
+                                        <tr>
+                                            <td style="padding: 20px;">
+                                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                    <tr>
+                                                        <td style="vertical-align: top; width: 50px;">
+                                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); border-radius: 12px; text-align: center; line-height: 50px;">
+                                                                <img src="https://img.icons8.com/ios-filled/30/ffffff/shield.png" alt="Security" width="24" style="vertical-align: middle;">
+                                                            </div>
+                                                        </td>
+                                                        <td style="padding-left: 15px; vertical-align: top;">
+                                                            <h3 style="color: #1a1a2e; font-size: 16px; font-weight: 600; margin: 0 0 5px;" th:text="#{email.welcome.feature.security.title}">Güvenli Ödeme</h3>
+                                                            <p style="color: #64748b; font-size: 14px; margin: 0; line-height: 1.5;" th:text="#{email.welcome.feature.security.description}">256-bit SSL şifreleme ile güvenli ödeme altyapısı.</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Feature 3 -->
+                            <tr>
+                                <td>
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius: 12px; border-left: 4px solid #e94560;">
+                                        <tr>
+                                            <td style="padding: 20px;">
+                                                <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                                    <tr>
+                                                        <td style="vertical-align: top; width: 50px;">
+                                                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); border-radius: 12px; text-align: center; line-height: 50px;">
+                                                                <img src="https://img.icons8.com/ios-filled/30/ffffff/headset.png" alt="Support" width="24" style="vertical-align: middle;">
+                                                            </div>
+                                                        </td>
+                                                        <td style="padding-left: 15px; vertical-align: top;">
+                                                            <h3 style="color: #1a1a2e; font-size: 16px; font-weight: 600; margin: 0 0 5px;" th:text="#{email.welcome.feature.support.title}">7/24 Destek</h3>
+                                                            <p style="color: #64748b; font-size: 14px; margin: 0; line-height: 1.5;" th:text="#{email.welcome.feature.support.description}">Her an yanınızdayız. Sorularınız için bize ulaşın.</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- CTA Section -->
+                <tr>
+                    <td class="cta-section" style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td align="center">
+                                    <a href="#" class="cta-button" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 50px; box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);">
+                                        🚗 <span th:text="#{email.welcome.cta.button}">Araç Kirala</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="padding-top: 15px;" th:with="discount = #{email.welcome.cta.promo.discount}">
+                                    <p class="cta-subtext" style="color: #64748b; font-size: 13px; margin: 0;" th:utext="#{email.welcome.cta.promo.text('<strong style=&quot;color: #e94560;&quot;>' + ${discount} + '</strong>')}">
+                                        İlk kiralamanızda <strong style="color: #e94560;">%15 indirim</strong> fırsatını kaçırmayın!
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Stats Section -->
+                <tr>
+                    <td style="background-color: #1a1a2e; padding: 30px;">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td align="center" width="33%">
+                                    <span style="color: #e94560; font-size: 28px; font-weight: 700; display: block;" th:text="|#{email.welcome.stats.car.count}+|">5000+</span>
+                                    <span style="color: #a0aec0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;" th:text="#{email.welcome.stats.car.label}">Araç</span>
+                                </td>
+                                <td width="1" style="background-color: #2d3748;"></td>
+                                <td align="center" width="33%">
+                                    <span style="color: #e94560; font-size: 28px; font-weight: 700; display: block;" th:text="|#{email.welcome.stats.city.count}+|">50+</span>
+                                    <span style="color: #a0aec0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;" th:text="#{email.welcome.stats.city.label}">Şehir</span>
+                                </td>
+                                <td width="1" style="background-color: #2d3748;"></td>
+                                <td align="center" width="33%">
+                                    <span style="color: #e94560; font-size: 28px; font-weight: 700; display: block;" th:text="|#{email.welcome.stats.customer.count}K+|">100K+</span>
+                                    <span style="color: #a0aec0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;" th:text="#{email.welcome.stats.customer.label}">Müşteri</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Social Section -->
+                <tr>
+                    <td class="social-section" style="padding: 30px; text-align: center; background-color: #ffffff;">
+                        <p style="color: #1a1a2e; font-size: 14px; font-weight: 600; margin: 0 0 20px;">
+                            Bizi Takip Edin
+                        </p>
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                            <tr>
+                                <td style="padding: 0 8px;">
+                                    <a href="#" style="display: inline-block; width: 44px; height: 44px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 50%; text-align: center; line-height: 44px; text-decoration: none;">
+                                        <img src="https://img.icons8.com/ios-filled/24/1a1a2e/facebook-new.png" alt="Facebook" width="20" style="vertical-align: middle;">
+                                    </a>
+                                </td>
+                                <td style="padding: 0 8px;">
+                                    <a href="#" style="display: inline-block; width: 44px; height: 44px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 50%; text-align: center; line-height: 44px; text-decoration: none;">
+                                        <img src="https://img.icons8.com/ios-filled/24/1a1a2e/twitter.png" alt="Twitter" width="20" style="vertical-align: middle;">
+                                    </a>
+                                </td>
+                                <td style="padding: 0 8px;">
+                                    <a href="#" style="display: inline-block; width: 44px; height: 44px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 50%; text-align: center; line-height: 44px; text-decoration: none;">
+                                        <img src="https://img.icons8.com/ios-filled/24/1a1a2e/instagram-new.png" alt="Instagram" width="20" style="vertical-align: middle;">
+                                    </a>
+                                </td>
+                                <td style="padding: 0 8px;">
+                                    <a href="#" style="display: inline-block; width: 44px; height: 44px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 50%; text-align: center; line-height: 44px; text-decoration: none;">
+                                        <img src="https://img.icons8.com/ios-filled/24/1a1a2e/linkedin.png" alt="LinkedIn" width="20" style="vertical-align: middle;">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td class="footer" style="background-color: #1a1a2e; padding: 40px 30px; text-align: center;">
+                        <h3 style="font-size: 24px; font-weight: 800; color: #ffffff; letter-spacing: 2px; margin: 0 0 15px;">
+                            RENT<span style="color: #e94560;">IO</span>
+                        </h3>
+                        <p style="color: #64748b; font-size: 13px; line-height: 1.6; margin: 0 0 20px;" th:utext="#{email.global.footer.description}">
+                            Araç kiralama deneyimini yeniden tanımlıyoruz.<br>
+                            Güvenli, hızlı ve konforlu.
+                        </p>
+
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 20px 0;">
+                            <tr>
+                                <td>
+                                    <a href="#" style="color: #a0aec0; text-decoration: none; font-size: 13px; padding: 0 10px;" th:text="#{email.global.footer.link.privacy}">Gizlilik Politikası</a>
+                                </td>
+                                <td style="color: #4a5568;">|</td>
+                                <td>
+                                    <a href="#" style="color: #a0aec0; text-decoration: none; font-size: 13px; padding: 0 10px;" th:text="#{email.global.footer.link.terms}">Kullanım Şartları</a>
+                                </td>
+                                <td style="color: #4a5568;">|</td>
+                                <td>
+                                    <a href="#" style="color: #a0aec0; text-decoration: none; font-size: 13px; padding: 0 10px;" th:text="#{email.global.footer.link.contact}">İletişim</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <div th:with="localAddress=#{email.global.footer.address}">
+                            <p style="color: #4a5568; font-size: 12px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #2d3748;" th:utext="#{email.global.footer.copyright(${localAddress})}">
+                                © 2026 Rentio. Tüm hakları saklıdır.<br>
+                                Ankara, Türkiye
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
