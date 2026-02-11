@@ -1,8 +1,7 @@
 package car_rental.demo.core.exceptions;
 
+import car_rental.demo.core.utilities.messages.MessageService;
 import lombok.AllArgsConstructor;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    private MessageSource messageSource;
+    private MessageService messageService;
 
 
     @ExceptionHandler
@@ -36,7 +35,7 @@ public class GlobalExceptionHandler {
         ValidationProblemDetail validationProblemDetail = new ValidationProblemDetail();
         validationProblemDetail.setErrors(new HashMap<>());
 
-        String errorMessage = messageSource.getMessage("error.message",null, LocaleContextHolder.getLocale());
+        String errorMessage = messageService.getMessage("error.message");
 
         validationProblemDetail.setMessage(errorMessage);
 

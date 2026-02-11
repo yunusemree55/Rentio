@@ -1,11 +1,10 @@
 package car_rental.demo.business.rules.user;
 
 import car_rental.demo.core.exceptions.BusinessException;
+import car_rental.demo.core.utilities.messages.MessageService;
 import car_rental.demo.dataAccess.abstracts.UserRepository;
 import car_rental.demo.entities.abstracts.User;
 import lombok.AllArgsConstructor;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,14 +12,14 @@ import org.springframework.stereotype.Service;
 public class UserBusinessRules<T extends User> {
 
     private UserRepository<T> userRepository;
-    private MessageSource messageSource;
+    private MessageService messageService;
 
     public void checkIfEmailExists(String email){
 
         boolean isExists = userRepository.existsByEmail(email);
 
         if(isExists){
-            throw new BusinessException(messageSource.getMessage("error.user.email.exists",null, LocaleContextHolder.getLocale()));
+            throw new BusinessException(messageService.getMessage("error.user.email.exists"));
         }
 
     }
@@ -30,7 +29,7 @@ public class UserBusinessRules<T extends User> {
         boolean isExists = userRepository.existsByPhoneNumber(phoneNumber);
 
         if(isExists){
-            throw new BusinessException(messageSource.getMessage("error.user.phoneNumber.exists",null,LocaleContextHolder.getLocale()));
+            throw new BusinessException(messageService.getMessage("error.user.phoneNumber.exists"));
         }
 
     }
@@ -40,7 +39,7 @@ public class UserBusinessRules<T extends User> {
         boolean isMatches = password.equals(confirmPassword);
 
         if(!isMatches){
-            throw new BusinessException(messageSource.getMessage("error.user.password.mismatch",null,LocaleContextHolder.getLocale()));
+            throw new BusinessException(messageService.getMessage("error.user.password.mismatch"));
         }
 
     }

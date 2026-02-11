@@ -7,6 +7,11 @@ import car_rental.demo.business.rules.customer.CustomerBusinessRules;
 import car_rental.demo.business.rules.user.UserBusinessRules;
 import car_rental.demo.core.utilities.hashing.HashingService;
 import car_rental.demo.core.utilities.mapper.ModelMapperService;
+import car_rental.demo.core.utilities.messages.MessageService;
+import car_rental.demo.core.utilities.results.DataResult;
+import car_rental.demo.core.utilities.results.Result;
+import car_rental.demo.core.utilities.results.SuccessDataResult;
+import car_rental.demo.core.utilities.results.SuccessResult;
 import car_rental.demo.dataAccess.abstracts.CustomerRepository;
 import car_rental.demo.entities.concretes.Customer;
 import lombok.AllArgsConstructor;
@@ -22,15 +27,17 @@ public class CustomerManager implements CustomerService {
     private UserBusinessRules<Customer> userBusinessRules;
     private CustomerBusinessRules customerBusinessRules;
     private HashingService hashingService;
+    private MessageService messageService;
 
     @Override
-    public List<GetAllCustomerResponse> getAll() {
+    public DataResult<List<GetAllCustomerResponse>> getAll() {
+
         List<GetAllCustomerResponse> responseList = customerRepository.findAll().stream().map(customer -> mapperService.forResponse().map(customer,GetAllCustomerResponse.class)).toList();
-        return responseList;
+        return new SuccessDataResult<List<GetAllCustomerResponse>>(responseList,messageService.getMessage("customer.listed"));
     }
 
     @Override
-    public void add(AddCustomerRequest customerRequest) {
+    public Result add(AddCustomerRequest customerRequest) {
 
         userBusinessRules.checkIfEmailExists(customerRequest.getEmail());
         userBusinessRules.checkIfPhoneNumberExists(customerRequest.getPhoneNumber());
@@ -39,5 +46,6 @@ public class CustomerManager implements CustomerService {
         customer.setPassword(hashingService.encode(customer.getPassword()));
 
         customerRepository.save(customer);
+        return new SuccessResult(messageService.getMessage("customer.added"));
     }
 }
